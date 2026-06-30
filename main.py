@@ -1,3 +1,13 @@
+import os
+try:
+    from dotenv import load_dotenv  # type: ignore[import-not-found]
+except Exception:
+    # fallback if python-dotenv isn't installed; no-op loader
+    def load_dotenv(*args, **kwargs):
+        return False
+
+load_dotenv()
+
 from fastapi import FastAPI, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -21,10 +31,11 @@ app.add_middleware(
 
 def get_db():
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Incapp11912",
-        database="kitchenmate",
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME"),
+        port=int(os.getenv("DB_PORT", 3306)),
     )
     cursor = db.cursor(dictionary=True)
     try:
