@@ -1,13 +1,5 @@
-<<<<<<< HEAD
 fastapi
 uvicorn[standard]
 mysql-connector-python
 python-dotenv
 gunicorn
-=======
-fastapi
-uvicorn[standard]
-mysql-connector-python
-python-dotenv
-gunicorn
->>>>>>> c05062273e58d480807f14bfb5084b3a28f1b87d
