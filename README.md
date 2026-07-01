@@ -641,7 +641,7 @@ This project is licensed under the MIT License.
 **Nawab Alam**
 
 - GitHub: https://github.com/nawabalam07
-- LinkedIn: *(Add your LinkedIn profile here)*
+- LinkedIn: [nawabalam](https://www.linkedin.com/in/nawab-alam-465754317/)
 
 ---
 
