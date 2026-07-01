@@ -44,7 +44,8 @@ A full-stack web application to manage and track kitchen expenses efficiently. T
 
 KitchenMate is a web-based application that simplifies shared expense management among roommates or kitchen groups. Create groups, invite members, track expenses, and automatically calculate who owes whom.
 
-**🔗 Live Demo:** [kitchenmate-web.onrender.com](https://kitchenmate-web.onrender.com)
+**🔗 Live Demo:** 
+[frontend](https://kitchen-expense-tracker-plum.vercel.app)
 
 ---
 
