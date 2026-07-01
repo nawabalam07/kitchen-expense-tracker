@@ -47,8 +47,6 @@ KitchenMate is a web-based application that simplifies shared expense management
 **🔗 Live Demo:** 
 [frontend](https://kitchen-expense-tracker-plum.vercel.app)
 
-[Backend AP](https://kitchen-expense-tracker.onrender.com)
-
 ---
 
 ## 📋 Table of Contents
