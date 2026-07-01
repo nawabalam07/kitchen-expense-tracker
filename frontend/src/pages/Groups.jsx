@@ -32,7 +32,7 @@ export default function Groups() {
 
   const fetchGroups = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/groups?user_id=${user.user_id}`);
+      const res = await axios.get(`${API_URL}/groups?user_id=${user.user_id}`);
       setGroups(res.data);
     } catch {
       show('Failed to load groups', 'error');

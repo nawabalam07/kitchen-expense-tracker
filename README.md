@@ -213,11 +213,11 @@ def get_db():
 Create `kitchenmate/.env.local`:
 
 ```env
-VITE_API_URL=http://localhost:8000
+VITE_API_URL=${API_URL}
 ```
 
 The app automatically detects the correct API URL:
-- **Local:** `http://localhost:8000`
+- **Local:** `${API_URL}`
 - **Production:** Reads from `VITE_API_URL` env variable
 
 ---

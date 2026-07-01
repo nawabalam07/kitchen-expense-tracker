@@ -58,10 +58,10 @@ export default function Dashboard() {
   const fetchAll = async () => {
     try {
       const [usersRes, expRes, balRes, groupsRes] = await Promise.all([
-        axios.get(`http://localhost:8000/users?group_id=${groupId}`),
-        axios.get(`http://localhost:8000/expenses?group_id=${groupId}`),
-        axios.get(`http://localhost:8000/balances?group_id=${groupId}`),
-        axios.get(`http://localhost:8000/groups?user_id=${user.user_id}`),
+        axios.get(`${API_URL}/users?group_id=${groupId}`),
+        axios.get(`${API_URL}/expenses?group_id=${groupId}`),
+        axios.get(`${API_URL}/balances?group_id=${groupId}`),
+        axios.get(`${API_URL}/groups?user_id=${user.user_id}`),
       ]);
       setUsers(usersRes.data);
       setExpenses(expRes.data);

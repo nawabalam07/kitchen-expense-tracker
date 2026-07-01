@@ -99,7 +99,7 @@ export default function AdminDashboard() {
 
   const fetchGroups = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/groups?user_id=${user.user_id}`);
+      const res = await axios.get(`${API_URL}/groups?user_id=${user.user_id}`);
       const mine = res.data.filter(g => g.is_admin);
       setGroups(mine);
       if (mine.length && !selected) setSelected(mine[0]);
@@ -110,10 +110,10 @@ export default function AdminDashboard() {
   const fetchGroupData = async (gid) => {
     try {
       const [r1, r2, r3, r4] = await Promise.all([
-        axios.get(`http://localhost:8000/groups/${gid}/requests?admin_id=${user.user_id}`),
-        axios.get(`http://localhost:8000/users?group_id=${gid}`),
-        axios.get(`http://localhost:8000/expenses?group_id=${gid}`),
-        axios.get(`http://localhost:8000/balances?group_id=${gid}`),
+        axios.get(`${API_URL}/groups/${gid}/requests?admin_id=${user.user_id}`),
+        axios.get(`${API_URL}/users?group_id=${gid}`),
+        axios.get(`${API_URL}/expenses?group_id=${gid}`),
+        axios.get(`${API_URL}/balances?group_id=${gid}`),
       ]);
       setPending(r1.data);
       setMembers(r2.data);
@@ -124,7 +124,7 @@ export default function AdminDashboard() {
 
   const handleAccept = async (uid) => {
     try {
-      await axios.post(`http://localhost:8000/groups/${selected.group_id}/accept/${uid}?admin_id=${user.user_id}`);
+      await axios.post(`${API_URL}/groups/${selected.group_id}/accept/${uid}?admin_id=${user.user_id}`);
       show('Member accepted', 'success');
       fetchGroupData(selected.group_id);
     } catch { show('Failed to accept member', 'error'); }
@@ -132,7 +132,7 @@ export default function AdminDashboard() {
 
   const handleReject = async (uid) => {
     try {
-      await axios.post(`http://localhost:8000/groups/${selected.group_id}/reject/${uid}?admin_id=${user.user_id}`);
+      await axios.post(`${API_URL}/groups/${selected.group_id}/reject/${uid}?admin_id=${user.user_id}`);
       show('Request declined', 'success');
       fetchGroupData(selected.group_id);
     } catch { show('Failed to decline request', 'error'); }
@@ -149,7 +149,7 @@ export default function AdminDashboard() {
   const handleCreateGroup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:8000/groups?user_id=${user.user_id}`, { group_name: newName });
+      await axios.post(`${API_URL}/groups?user_id=${user.user_id}`, { group_name: newName });
       show(`"${newName}" created`, 'success');
       setNewName('');
       setShowGroupModal(false);
@@ -191,7 +191,7 @@ export default function AdminDashboard() {
   const handleClearData = async () => {
     setClearing(true);
     try {
-      await axios.post(`http://localhost:8000/groups/${selected.group_id}/clear-expenses?admin_id=${user.user_id}`);
+      await axios.post(`${API_URL}/groups/${selected.group_id}/clear-expenses?admin_id=${user.user_id}`);
       setUndoActive(true);
       setUndoTimer(30);
       setShowClearModal(false);
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
 
   const handleUndo = async () => {
     try {
-      await axios.post(`http://localhost:8000/groups/${selected.group_id}/undo-clear?admin_id=${user.user_id}`);
+      await axios.post(`${API_URL}/groups/${selected.group_id}/undo-clear?admin_id=${user.user_id}`);
       show('✓ Data restored successfully!', 'success');
       setUndoActive(false);
       fetchGroupData(selected.group_id);
