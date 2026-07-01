@@ -421,20 +421,9 @@ http://127.0.0.1:5000/
 
 ## 📸 Screenshots
 
-> Add screenshots here.
 
-Example:
+<img width="1917" height="900" alt="image" src="https://github.com/user-attachments/assets/ad962b54-3320-4f2e-a6bd-41d02de11ec2" />
 
-```
-screenshots/
-│
-├── login.png
-├── dashboard.png
-├── add-expense.png
-├── expense-history.png
-```
-
----
 
 ## 📈 Future Improvements
 
