@@ -258,7 +258,7 @@ export default function AdminDashboard() {
           <span className="badge badge-admin">Admin</span>
         </div>
         <div className="navbar-right">
-          <span style={{ color: 'var(--t2)', fontSize: '0.85rem' }}>👋 {user?.user_name}</span>
+          <span className="mobile-user-label">{user?.user_name}</span>
           {selected && (
             <button className="btn btn-saffron btn-sm" onClick={openExpenseModal}>
               <PlusIcon /> Add Expense
@@ -310,12 +310,12 @@ export default function AdminDashboard() {
               <div className="anim-fade-in">
 
                 <div className="card card-pad mb-4">
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="admin-group-header mb-4">
                     <div>
                       <h2 style={{ marginBottom: '0.2rem' }}>{selected.group_name}</h2>
                       <p className="text-sm text-muted">Managed by you · {members.length} members</p>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div className="admin-group-actions">
                       {pending.length > 0 && (
                         <div style={{
                           background: 'var(--rose-bg)', border: '1px solid var(--rose-rim)',
@@ -371,7 +371,7 @@ export default function AdminDashboard() {
 
                 {tab === 'overview' && (
                   <div className="grid-2 anim-fade-in">
-                    <div className="card card-pad" style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div className="card card-pad card-column">
                       <h4 className="mb-4" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
                         Join Requests
                         {pending.length > 0 && <span className="notif-dot">{pending.length}</span>}
@@ -383,7 +383,7 @@ export default function AdminDashboard() {
                           </div>
                         ) : pending.map(req => (
                           <div key={req.user_id} className="request-row">
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <div className="row-main">
                               <div className="avatar">{initials(req.user_name)}</div>
                               <div>
                                 <p style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--t1)' }}>{req.user_name}</p>
@@ -403,7 +403,7 @@ export default function AdminDashboard() {
                       </div>
                     </div>
 
-                    <div className="card card-pad" style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div className="card card-pad card-column">
                       <h4 className="mb-4" style={{ flexShrink: 0 }}>Balances</h4>
                       <div className="card-scroll">
                         {balances.length === 0 ? (
@@ -412,7 +412,7 @@ export default function AdminDashboard() {
                           </div>
                         ) : balances.map(b => (
                           <div key={b.user_id} className="row-item">
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <div className="row-main">
                               <div className="avatar">{initials(b.user_name)}</div>
                               <span style={{ fontWeight: 500 }}>{b.user_name}</span>
                             </div>
@@ -427,7 +427,7 @@ export default function AdminDashboard() {
                 )}
 
                 {tab === 'expenses' && (
-                  <div className="card card-pad anim-fade-in" style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div className="card card-pad anim-fade-in card-column">
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexShrink: 0 }}>
                       <h4>All Expenses</h4>
                       <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -449,7 +449,7 @@ export default function AdminDashboard() {
                         </div>
                       ) : expenses.map(exp => (
                         <div key={exp.expense_id} className="row-item">
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                          <div className="row-main">
                             <div style={{
                               width: 38, height: 38, borderRadius: 'var(--r-sm)', flexShrink: 0,
                               background: exp.paid_by === user?.user_id ? 'var(--saffron-bg)' : 'var(--emerald-bg)',
@@ -475,7 +475,7 @@ export default function AdminDashboard() {
                 )}
 
                 {tab === 'members' && (
-                  <div className="card card-pad anim-fade-in" style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div className="card card-pad anim-fade-in card-column">
                     <h4 className="mb-4" style={{ flexShrink: 0 }}>Members ({members.length})</h4>
                     <div className="card-scroll">
                       {members.length === 0 ? (
@@ -485,7 +485,7 @@ export default function AdminDashboard() {
                         </div>
                       ) : members.map(m => (
                         <div key={m.user_id} className="row-item">
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                          <div className="row-main">
                             <div className="avatar">{initials(m.user_name)}</div>
                             <div>
                               <p style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--t1)' }}>
@@ -535,7 +535,7 @@ export default function AdminDashboard() {
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="form-grid-2">
                 <div className="field" style={{ marginBottom: 0 }}>
                   <label>Amount (₹)</label>
                   <input
@@ -560,7 +560,7 @@ export default function AdminDashboard() {
               </div>
 
               <div className="field" style={{ marginTop: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
+                <div className="field-heading-row">
                   <label style={{ margin: 0 }}>
                     Split with <span style={{ color: 'var(--saffron)' }}>({splitWith.length})</span>
                   </label>
@@ -573,7 +573,7 @@ export default function AdminDashboard() {
                 {members.length === 0 ? (
                   <p className="text-sm text-muted">No members in this group yet.</p>
                 ) : (
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem' }}>
+                  <div className="checkbox-grid">
                     {members.map(m => (
                       <Checkbox key={m.user_id} checked={splitWith.includes(m.user_id)} label={m.user_id === user?.user_id ? `${m.user_name} (you)` : m.user_name} onChange={() => toggleSplit(m.user_id)} />
                     ))}
@@ -592,7 +592,7 @@ export default function AdminDashboard() {
                 </div>
               )}
 
-              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
+              <div className="button-row">
                 <button type="button" className="btn btn-ghost" style={{ flex: 1 }} onClick={() => setShowExpenseModal(false)}>Cancel</button>
                 <button type="submit" className="btn btn-saffron" style={{ flex: 1 }} disabled={saving}>{saving ? 'Saving…' : 'Save Expense'}</button>
               </div>
@@ -613,7 +613,7 @@ export default function AdminDashboard() {
                 <label>Group Name</label>
                 <input className="input" placeholder="e.g. Weekend Cooking Club" value={newName} onChange={e => setNewName(e.target.value)} required autoFocus />
               </div>
-              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
+              <div className="button-row">
                 <button type="button" className="btn btn-ghost" style={{ flex: 1 }} onClick={() => setShowGroupModal(false)}>Cancel</button>
                 <button type="submit" className="btn btn-saffron" style={{ flex: 1 }}>Create Group</button>
               </div>
@@ -641,7 +641,7 @@ export default function AdminDashboard() {
                 ℹ️ You'll have <strong>30 seconds</strong> to undo this action if you change your mind.
               </div>
             </div>
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <div className="button-row" style={{ marginTop: 0 }}>
               <button type="button" className="btn btn-ghost" style={{ flex: 1 }} onClick={() => setShowClearModal(false)}>Cancel</button>
               <button type="button" className="btn btn-danger" style={{ flex: 1 }} onClick={handleClearData} disabled={clearing}>
                 {clearing ? 'Clearing…' : 'Clear All Data'}
@@ -653,3 +653,5 @@ export default function AdminDashboard() {
     </div>
   );
 }
+
+

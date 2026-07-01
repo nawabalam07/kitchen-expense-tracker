@@ -55,14 +55,14 @@ export default function Groups() {
           KitchenMate
         </div>
         <div className="navbar-right">
-          <span style={{ color: 'var(--t2)', fontSize: '0.85rem' }}>👋 {user?.user_name}</span>
+          <span className="mobile-user-label">{user?.user_name}</span>
           <button className="btn btn-danger btn-sm" onClick={() => { logout(); navigate('/'); }}>
             <LogoutIcon /> Logout
           </button>
         </div>
       </nav>
 
-      <div className="container" style={{ maxWidth: 860 }}>
+      <div className="container content-narrow">
         {/* Page header */}
         <div className="anim-fade-up" style={{ marginBottom: '2.5rem' }}>
           <h1 style={{ marginBottom: '0.35rem' }}>Your Groups</h1>
@@ -84,15 +84,8 @@ export default function Groups() {
                 <div className="grid-2">
                   {pending.map(g => (
                     <div key={g.group_id} className="group-card pending">
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '0.75rem' }}>
-                        <div style={{
-                          width: 42, height: 42, borderRadius: 'var(--r-md)',
-                          background: 'rgba(251,191,87,0.08)',
-                          border: '1px solid rgba(251,191,87,0.2)',
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          fontFamily: 'var(--font-display)', fontWeight: 800,
-                          color: '#fbbf57', fontSize: '0.9rem', flexShrink: 0,
-                        }}>
+                      <div className="group-card-head" style={{ marginBottom: '0.75rem' }}>
+                        <div className="group-card-avatar pending">
                           {initials(g.group_name)}
                         </div>
                         <div>
@@ -134,15 +127,8 @@ export default function Groups() {
                       className="group-card anim-fade-up"
                       onClick={() => navigate(`/dashboard/${g.group_id}`)}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '1rem' }}>
-                        <div style={{
-                          width: 46, height: 46, borderRadius: 'var(--r-md)',
-                          background: 'var(--saffron-bg)',
-                          border: '1px solid var(--saffron-rim)',
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          fontFamily: 'var(--font-display)', fontWeight: 800,
-                          color: 'var(--saffron)', fontSize: '0.95rem', flexShrink: 0,
-                        }}>
+                      <div className="group-card-head">
+                        <div className="group-card-avatar">
                           {initials(g.group_name)}
                         </div>
                         <div>
@@ -153,11 +139,7 @@ export default function Groups() {
                         </div>
                       </div>
 
-                      <div style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                        paddingTop: '0.85rem',
-                        borderTop: '1px solid var(--rim)',
-                      }}>
+                      <div className="group-card-footer">
                         <p className="text-sm text-muted">Open dashboard</p>
                         <span style={{ color: 'var(--saffron)' }}><ArrowIcon /></span>
                       </div>
@@ -172,3 +154,4 @@ export default function Groups() {
     </div>
   );
 }
+

@@ -199,7 +199,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
+        <div className="section-toolbar">
           <div className="tab-bar">
             {['expenses', 'balances', 'members'].map(t => (
               <button key={t} className={`tab-btn ${tab === t ? 'active' : ''}`} onClick={() => setTab(t)}>
@@ -211,7 +211,7 @@ export default function Dashboard() {
         </div>
 
         {tab === 'expenses' && (
-          <div className="card card-pad anim-fade-in" style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="card card-pad anim-fade-in card-column">
             <h4 style={{ marginBottom: '1.25rem', flexShrink: 0 }}>Recent Expenses</h4>
             <div className="card-scroll">
               {expenses.length === 0 ? (
@@ -226,7 +226,7 @@ export default function Dashboard() {
               ) : (
                 expenses.map((exp, i) => (
                   <div key={exp.expense_id} className="row-item anim-fade-up" style={{ animationDelay: `${i * 0.04}s` }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <div className="row-main row-main-lg">
                       <div style={{
                         width: 42, height: 42, borderRadius: 'var(--r-md)', flexShrink: 0,
                         background: exp.paid_by === user?.user_id ? 'var(--saffron-bg)' : 'var(--surface-2)',
@@ -246,7 +246,7 @@ export default function Dashboard() {
                         </p>
                       </div>
                     </div>
-                    <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                    <div className="row-side">
                       <p style={{ fontWeight: 800, color: 'var(--t1)', fontSize: '1rem' }}>₹{exp.amount.toFixed(2)}</p>
                       <p className="text-xs text-dim">per person: ₹{(exp.amount).toFixed(2)}</p>
                     </div>
@@ -258,7 +258,7 @@ export default function Dashboard() {
         )}
 
         {tab === 'balances' && (
-          <div className="card card-pad anim-fade-in" style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="card card-pad anim-fade-in card-column">
             <h4 style={{ marginBottom: '1.25rem', flexShrink: 0 }}>Group Balances</h4>
             <div className="card-scroll">
               {balances.length === 0 ? (
@@ -269,7 +269,7 @@ export default function Dashboard() {
               ) : (
                 [...balances].sort((a, b) => b.amount - a.amount).map((b, i) => (
                   <div key={b.user_id} className="row-item anim-fade-up" style={{ animationDelay: `${i * 0.04}s` }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                    <div className="row-main">
                       <div className="avatar">{initials(b.user_name)}</div>
                       <div>
                         <p style={{ fontWeight: 600, color: 'var(--t1)', fontSize: '0.9rem' }}>
@@ -284,7 +284,7 @@ export default function Dashboard() {
                       </div>
                     </div>
 
-                    <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                    <div className="row-side">
                       <p style={{
                         fontWeight: 800, fontSize: '1.1rem',
                         color: b.amount >= 0 ? 'var(--emerald)' : 'var(--rose)',
@@ -311,7 +311,7 @@ export default function Dashboard() {
         )}
 
         {tab === 'members' && (
-          <div className="card card-pad anim-fade-in" style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="card card-pad anim-fade-in card-column">
             <h4 style={{ marginBottom: '1.25rem', flexShrink: 0 }}>Members ({users.length})</h4>
             <div className="card-scroll">
               {users.length === 0 ? (
@@ -322,7 +322,7 @@ export default function Dashboard() {
               ) : (
                 users.map((u, i) => (
                   <div key={u.user_id} className="row-item anim-fade-up" style={{ animationDelay: `${i * 0.04}s` }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                    <div className="row-main">
                       <div className="avatar" style={u.user_id === user?.user_id ? { background: 'var(--saffron-bg)', color: 'var(--saffron)', borderColor: 'var(--saffron-rim)' } : {}}>
                         {initials(u.user_name)}
                       </div>
@@ -368,7 +368,7 @@ export default function Dashboard() {
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="form-grid-2">
                 <div className="field" style={{ marginBottom: 0 }}>
                   <label>Amount (₹)</label>
                   <input
@@ -393,7 +393,7 @@ export default function Dashboard() {
               </div>
 
               <div className="field" style={{ marginTop: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
+                <div className="field-heading-row">
                   <label style={{ margin: 0 }}>
                     Split with <span style={{ color: 'var(--saffron)' }}>({selected.length})</span>
                   </label>
@@ -411,7 +411,7 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem' }}>
+                <div className="checkbox-grid">
                   {users.map(u => (
                     <Checkbox
                       key={u.user_id}
@@ -435,7 +435,7 @@ export default function Dashboard() {
                 </div>
               )}
 
-              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
+              <div className="button-row">
                 <button type="button" className="btn btn-ghost" style={{ flex: 1 }} onClick={() => setShowModal(false)}>
                   Cancel
                 </button>
