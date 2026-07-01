@@ -36,8 +36,8 @@ function initials(name) {
 
 function Checkbox({ checked, label, onChange }) {
   return (
-    <label className={`check-label ${checked ? 'checked' : ''}`} onClick={onChange} style={{ cursor: 'pointer' }}>
-      <input type="checkbox" readOnly checked={checked} style={{ display: 'none' }} />
+    <label className={`check-label ${checked ? 'checked' : ''}`} style={{ cursor: 'pointer' }}>
+      <input type="checkbox" checked={checked} onChange={onChange} style={{ display: 'none' }} />
       <span className="check-box">{checked && <TickIcon />}</span>
       <span>{label}</span>
     </label>
