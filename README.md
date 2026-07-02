@@ -1,37 +1,3 @@
-<<<<<<< HEAD
-# 🍽️ Kitchen Expense Tracker
-
-A full-stack web application to manage and track kitchen expenses efficiently. This application helps users record daily expenses, categorize spending, monitor budgets, and view expense history through an intuitive interface.
-
-## 📌 Features
-
-- 🔐 User Authentication (Login & Signup)
-- ➕ Add Kitchen Expenses
-- ✏️ Edit Existing Expenses
-- 🗑️ Delete Expenses
-- 📋 View Expense History
-- 📂 Category-wise Expense Management
-- 📊 Dashboard with Expense Summary
-- 🔍 Search & Filter Expenses
-- 📱 Responsive User Interface
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-- HTML5
-- CSS3
-- JavaScript
-- Bootstrap
-
-### Backend
-- Python
-- Flask
-
-### Database
-- MySQL
-=======
 # 🍳 KitchenMate
 
 > **A modern shared kitchen expense tracking application**
@@ -455,20 +421,9 @@ http://127.0.0.1:5000/
 
 ## 📸 Screenshots
 
-> Add screenshots here.
 
-Example:
+<img width="1917" height="900" alt="image" src="https://github.com/user-attachments/assets/ad962b54-3320-4f2e-a6bd-41d02de11ec2" />
 
-```
-screenshots/
-│
-├── login.png
-├── dashboard.png
-├── add-expense.png
-├── expense-history.png
-```
-
----
 
 ## 📈 Future Improvements
 
@@ -686,7 +641,7 @@ This project is licensed under the MIT License.
 **Nawab Alam**
 
 - GitHub: https://github.com/nawabalam07
-- LinkedIn: *(Add your LinkedIn profile here)*
+- LinkedIn: [nawabalam](https://www.linkedin.com/in/nawab-alam-465754317/)
 
 ---
 
