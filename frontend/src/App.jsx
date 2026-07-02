@@ -8,14 +8,18 @@ import Groups         from './pages/Groups';
 import Dashboard      from './pages/Dashboard';
 
 const AdminRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  // Auth is still being restored from localStorage (e.g. right after a page
+  // refresh) — don't redirect yet, or a logged-in user gets bounced out.
+  if (loading) return null;
   if (!user) return <Navigate to="/" />;
   if (user.role !== 'admin') return <Navigate to="/groups" />;
   return children;
 };
 
 const MemberRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  if (loading) return null;
   if (!user) return <Navigate to="/" />;
   if (user.role === 'admin') return <Navigate to="/admin/dashboard" />;
   return children;

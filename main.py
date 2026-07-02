@@ -162,6 +162,7 @@ def user_signup(req: UserSignupRequest, db_dep=Depends(get_db)):
     db, cursor = db_dep
 
     # Validate invite code first
+    #Piyush
     cursor.execute(
         "SELECT group_id, group_name FROM `groups` WHERE invite_code = %s",
         (req.invite_code,),

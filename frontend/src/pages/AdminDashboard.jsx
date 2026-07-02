@@ -17,6 +17,18 @@ function CopyIcon() {
 function PlusIcon() {
   return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>;
 }
+function RefreshIcon({ spinning }) {
+  return (
+    <svg
+      width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"
+      style={spinning ? { animation: 'spin 0.8s linear infinite' } : undefined}
+    >
+      <polyline points="23 4 23 10 17 10"/>
+      <polyline points="1 20 1 14 7 14"/>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+    </svg>
+  );
+}
 function LogoutIcon() {
   return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>;
 }
@@ -57,6 +69,7 @@ export default function AdminDashboard() {
   const [balances, setBalances] = useState([]);
   const [tab, setTab] = useState('overview');
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showGroupModal, setShowGroupModal] = useState(false);
   const [showExpenseModal, setShowExpenseModal] = useState(false);
@@ -155,6 +168,19 @@ export default function AdminDashboard() {
       setShowGroupModal(false);
       fetchGroups();
     } catch { show('Failed to create group', 'error'); }
+  };
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    try {
+      await fetchGroups();
+      if (selected) await fetchGroupData(selected.group_id);
+      show('Dashboard refreshed', 'success');
+    } catch {
+      show('Failed to refresh dashboard', 'error');
+    } finally {
+      setRefreshing(false);
+    }
   };
 
   const toggleSplit = (uid) => setSplitWith(s => s.includes(uid) ? s.filter(i => i !== uid) : [...s, uid]);
@@ -259,6 +285,14 @@ export default function AdminDashboard() {
         </div>
         <div className="navbar-right">
           <span className="mobile-user-label">{user?.user_name}</span>
+          <button
+            className="btn btn-ghost btn-sm"
+            onClick={handleRefresh}
+            disabled={refreshing}
+            title="Refresh dashboard"
+          >
+            <RefreshIcon spinning={refreshing} /> {refreshing ? 'Refreshing…' : 'Refresh'}
+          </button>
           {selected && (
             <button className="btn btn-saffron btn-sm" onClick={openExpenseModal}>
               <PlusIcon /> Add Expense
@@ -653,5 +687,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-
-
